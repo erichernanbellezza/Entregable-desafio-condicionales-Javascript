@@ -1,1 +1,1 @@
-Entregable desafio condicionales Javascript
+Desafios entregables javaScript
