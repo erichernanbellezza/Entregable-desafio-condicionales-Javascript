@@ -1,3 +1,4 @@
+// La idea de esta función es poder seleccionar un producto en cuestión y luego aplicarle el IVA
 
 function ventaProductos() {
 
@@ -7,6 +8,9 @@ function ventaProductos() {
         let productoElegido = parseInt(prompt("Ingresa un número"));
 
     function seleccionarProducto (){
+        /* Acá utilice un switch case con condicionales dentro para que se despliegue el 
+           precio del producto el cual vendría con imagen, pero como aún no se como utilizarlo bien con html queda así .  */
+       
         switch (productoElegido) {
             case 1 : 
                 if (productoElegido == 1) {
@@ -40,6 +44,7 @@ function ventaProductos() {
     seleccionarProducto();
 
     function calcularPrecioFinal () {
+         // En función de que producto se selecciono utilicé condicionales para luego aplicarle el IVA y obtener el precio final.
         if (productoElegido == 1) {
             productoElegido = 21000
             let valorConIva = productoElegido * 21/100;
