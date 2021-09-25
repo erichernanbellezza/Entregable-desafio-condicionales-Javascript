@@ -39,9 +39,6 @@ const producto3 = new producto("Samsung A20", 30999);
 const producto4 = new producto("Samsung A52", 59999);
 const producto5 = new producto("Samsung S21 Ultra", 195999);
 
-producto5.sumaIva();
-console.log(producto5);
-
 
 // La idea de esta función es poder seleccionar un producto en cuestión y luego aplicarle el IVA
 
