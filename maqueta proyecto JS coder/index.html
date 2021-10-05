@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./SASS/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+  <header class="header">
+    <img class="" src="./imagenes/logo.jpg" alt="">
+    <img src="./imagenes/carrito.jpg" alt="">
+  </header>
+  <main class="main__principalContent">
+    <section class="buscador">
+         <input type="text" placeholder="Buscar por nombre">
+         <label for=""></label>
+         <button>Buscar</button>
+    </section>
+    <section class="segundaSeccionMain">
+        <div class="rangoPrecios">
+            <h2>Resultados para:</h2>
+            <h3>Rango de precio</h3>
+            <input id=primerSlider type="range" value="20000" min="20000" max="300000" oninput="this.nextElementSibling.value = this.value"><output id=resultadoOutput>20000</output>
+            <input type="range" value="300000" min="20000" max="300000" oninput="this.nextElementSibling.value = this.value"><output>300000</output>
+            <button class="aplicarPrecios" id="precioAplicado">Aplicar</button>      
+        </div>
+        <div class="productos" id="productosCreados">
+        </div>
+    </section>
+  </main>
+  <script src="./main.js"></script>
+</body>
+</html>
+
+   
+    
+   
