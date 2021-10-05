@@ -112,14 +112,6 @@ document.getElementById("productosCreados").appendChild(productos6);
 
 
 
-const botonPrecioAplicado = document.getElementById("precioAplicado");
-
-
-botonPrecioAplicado.addEventListener('click', () => {
-    productos6.remove();
-});
-
-
 
 
 
