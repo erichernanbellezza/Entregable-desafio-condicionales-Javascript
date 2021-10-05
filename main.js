@@ -54,7 +54,7 @@ let productos3 = document.createElement("div");
 productos3.classList.add('producto');
 productos3.innerHTML = `
                 <h3 class="nombreCelular">${producto3.nombre}</h3>
-                <img class="imagenCelular" src="../imagenes/Celular Galaxy A10s-21.999.png" alt="">
+                <img class="imagenCelular" src="./imagenes/Celular Galaxy A10s-21.999.png" alt="">
                 <div>
                     <button class="anadirAlCarrito">Añadir</button>
                     <p>$ ${producto3.precio}</p> 
