@@ -8,7 +8,7 @@ let listaProductos = [
     {id: 6, nombre: "Samsung M12", precio: 50.999, img: './imagenes/Celular Galaxy M12-35999.png'}
 ]
     
-//añadiendo a travez del DOM el primer producto
+//añadiendo a traves del DOM con un bucle los productos
 
 listaProductos.forEach( (producto) => {
     const div = document.createElement('div')
