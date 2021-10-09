@@ -14,21 +14,26 @@
     <img class="imagenLogo" src="./imagenes/logo.jpg" alt="" id="toggleLogo">
     <button onclick="cambiarBotonModoOscuro()" id="botonModoOscuro" class="estilosBotonModoOscuro">Modo Oscuro</button>
     <img class="imagenBolsa" src="./imagenes/bolsa negra.jpg" alt="" id="toggleBolsa">
-  
-    <!--
-    <div class="estilosCarritoDeCompras" id="carritoDeCompras">
+
+    <div class="contenedorProductosCarrito" id="carritoDeCompras">
+      <h2>Carrito</h2>
       <div class="estilostitulosCarrito">
         <h4 id="tituloProducto">Producto</h4>
         <h4 id="tituloPrecio">Precio</h4>
         <h4 id="tituloCantidad">Cantidad</h4>
-      </div>
-      <div class="estilosProductosCarrito" id="productosCarrito">
-        <img src="./imagenes/" alt="">
-      </div>
-      <div class="estilosSumaTotal" id="sumaTotal">
-      </div>
     </div>
-    -->
+      <div id='productosEnCarrito' class="estilosCarritoDeCompras ">
+        
+        
+      </div>
+      <div class="estilosSumaTotal" >
+       Precio Total : $ <span id="sumaTotal"></span>
+      </div>
+      <button class="estilosCerrarCarrito" id="cerrarCarrito">Cerrar</button>
+      </div>
+         
+    </div>
+    
   </header>
   <main class="main__principalContent">
     <section class="buscador">
@@ -45,6 +50,7 @@
             <button class="aplicarPrecios" id="precioAplicado">Aplicar</button>      
         </div>
         <div class="productos" id="contenedorProductos">
+          
         </div>
     </section>
   </main>
