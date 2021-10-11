@@ -5,6 +5,9 @@ const cambiarColorBolsa = document.getElementById('toggleBolsa');
 const cambiarColorLogo = document.getElementById('toggleLogo');
 const cambiarColorCarrito = document.getElementById('carritoDeCompras');
 const precioFinal = document.getElementById('sumaTotal');
+const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
+
+const miLocalStorage = window.localStorage;
 
 
 let listaProductos = [
@@ -21,7 +24,9 @@ let listaProductos = [
     {id: 11, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'}
 ]
 
+
 const carrito = []
+
     
 //Acá se van añadiendo con un bucle forEach a traves del DOM los productos a la página.
 
@@ -68,6 +73,7 @@ const agregarAlCarrito = (itemId) => {
     console.log(carrito)
 
     actualizarCarrito()
+    
 }
 
 //// esta función sirve para añadir el innerHTML a los productos del carrito
@@ -94,6 +100,9 @@ const actualizarCarrito = () => {
     })
 
     precioFinal.innerText = carrito.reduce((acc, producto) => acc += producto.precio * producto.cantidad , 0)
+
+    guardarCarritoEnLocalStorage();
+
 };
 
 //// Función para eliminar los productos del carrito
@@ -109,7 +118,24 @@ const eliminarProducto = (itemId) => {
     }
     
     actualizarCarrito()
+
+    guardarCarritoEnLocalStorage();
+
 };
+
+
+  //
+  function guardarCarritoEnLocalStorage () {
+    miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function cargarCarritoDeLocalStorage () {
+    // ¿Existe un carrito previo guardado en LocalStorage?
+    if (miLocalStorage.getItem('carrito') !== null) {
+        // Carga la información
+        carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+    }
+}
 
 
 // Acá voy a añadir un modo oscuro a la página, voy a cambiar el background principal, el color de la tipografía y el logo de la página.
@@ -141,8 +167,8 @@ function cambiarBotonModoOscuro() {
 const mostrarCarrito = document.getElementById('toggleBolsa');
 
 mostrarCarrito.addEventListener('click', () => {
-    cambiarColorCarrito.classList.toggle('mostrarCarrito');
-    console.log(cambiarColorCarrito);
+    abrirCerrarCarrito.classList.toggle('mostrarCarrito');
+    console.log(abrirCerrarCarrito);
 });
 
 //// acá se cierra el carrito ////
@@ -150,6 +176,23 @@ mostrarCarrito.addEventListener('click', () => {
 const cerrarCarrito = document.getElementById('cerrarCarrito');
 
 cerrarCarrito.addEventListener('click', () => {
-    cambiarColorCarrito.classList.toggle('mostrarCarrito');
-
+    abrirCerrarCarrito.classList.toggle('mostrarCarrito');
+    console.log(abrirCerrarCarrito);
 })
+
+
+/*
+    ////// Local Storage
+    const guardarLocal = (clave, valor) => { localStorage.setItem(clave, valor) };
+
+    //Almacenar producto por producto
+    for (const producto of carrito) {
+        guardarLocal(producto.id, JSON.stringify(producto));
+    }
+    
+    let carritoLS = JSON.parse( localStorage.getItem('guardarLocal') )
+    
+    if(carritoLS) {
+        carrito = carritoLS
+    }
+*/
