@@ -1,5 +1,4 @@
 
-
 const modoOscuro = document.getElementById('botonModoOscuro');
 const botonPrecioAplicado = document.getElementById('precioAplicado');
 const headerModoOscuro = document.getElementById('headerModoOscuroId');
@@ -178,6 +177,8 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
     }
     
     cargarCarritoDeLocalStorage();
+
+    actualizarCarrito();
 
 
 
