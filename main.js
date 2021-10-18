@@ -7,27 +7,23 @@ const cambiarColorLogo = document.getElementById('toggleLogo');
 const cambiarColorCarrito = document.getElementById('carritoDeCompras');
 const precioFinal = document.getElementById('sumaTotal');
 const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
+const selectMarca = document.getElementById('ordenarPorMarca');
+const selectPrecio = document.getElementById('ordenarPorPrecio');
+const botonBuscar = document.getElementById('botonBuscar');
+const ocultarMain = document.getElementById('mainPrincipal');
+const mostrarCompra = document.getElementById('compraID');
+const precioFinalCompra = document.getElementById('totalCompra')
+const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
 
-    let listaProductos = [
-        {id: 1, nombre: "Samsung A01 Core", precio: 15900, img: './imagenes/Celular Galaxy A01 Core-15.999.jpg'},
-        {id: 2, nombre: "Samsung A01", precio: 18900, img: './imagenes/Celular Galaxy A01-18999.jpg'},
-        {id: 3, nombre: "Samsung A10s", precio: 21900, img: './imagenes/Celular Galaxy A10s-21.999.png'},
-        {id: 4, nombre: "Samsung A11", precio: 24900, img: './imagenes/Celular Galaxy A11-24.999.png'},
-        {id: 5, nombre: "Samsung A31", precio: 39900, img: './imagenes/Celular Galaxy A31-39999.png'},
-        {id: 6, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'},
-        {id: 7, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'},
-        {id: 8, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'},
-        {id: 9, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'},
-        {id: 10, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'},
-        {id: 11, nombre: "Samsung M12", precio: 50900, img: './imagenes/Celular Galaxy M12-35999.png'}
-    ]
-    
-    
-    let carrito = []
-    const miLocalStorage = window.localStorage;
-    
+   
+ 
     
     //Acá se van añadiendo con un bucle forEach a traves del DOM los productos a la página.
+
+    let carrito = []
+    
+    const miLocalStorage = window.localStorage;
+    
     
     const mostrarProductos = (array) => {
         contenedorProductos.innerHTML = ``
@@ -57,6 +53,7 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
     
         if (productoEncarrito) {
             productoEncarrito.cantidad++
+         
         } else {
             const prod = listaProductos.find( (prod) => prod.id === itemId)
     
@@ -74,7 +71,7 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
         actualizarCarrito()
         
         guardarCarritoEnLocalStorage();
-        
+
     }
     
     //// esta función sirve para añadir el innerHTML a los productos del carrito
@@ -91,15 +88,17 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
                 <img src="${producto.img}">
                 <p class="nombreProductoCarrito">${producto.nombre}</p>
                 <p class="precioProductosCarrito">$ ${producto.precio}</p>
-                <input class="cantidadInputCarrito" type="text" placeholder="${producto.cantidad}">
+                <p class="cantidadCarrito"> ${producto.cantidad} </p>
                 <button onclick="eliminarProducto(${producto.id})" class="buttonCantidad">X</button>
             </div>
             <div>
             `
             productosEnCarrito.appendChild(div)
+
         })
-    
+
         precioFinal.innerText = carrito.reduce((acc, producto) => acc += producto.precio * producto.cantidad , 0)
+        
         
     };
     
@@ -107,7 +106,7 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
     
     const eliminarProducto = (itemId) => {
         const producto = carrito.find((producto) => producto.id === itemId)
-    
+
         producto.cantidad--
     
         if (producto.cantidad === 0) {
@@ -118,52 +117,25 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
         actualizarCarrito()
        
         guardarCarritoEnLocalStorage();
+        
     };
-    
-    
-    // Acá voy a añadir un modo oscuro a la página, voy a cambiar el background principal, el color de la tipografía y el logo de la página.
-    
-    modoOscuro.addEventListener('click', () => {
-        toggleModoOscuro.classList.toggle('fondoOscuro');
-        botonPrecioAplicado.classList.toggle('botonAplicarModoOscuro');
-        headerModoOscuroId.classList.toggle('modoOscuroHeader');
-        cambiarColorCarrito.classList.toggle('modoOscuroCarrito');
-        console.log(modoOscuro);
-    });
-    
-    function cambiarBotonModoOscuro() {
-        let texto = document.getElementById("botonModoOscuro");
-        if (texto.innerHTML == "Modo Oscuro") {
-          texto.innerHTML = "Modo Claro";
-          cambiarColorLogo.src = "./imagenes/logo negro.jpg";
-          cambiarColorBolsa.src = "./imagenes/bolsa blanca.jpg";
-        } else {
-          texto.innerHTML = "Modo Oscuro";
-          cambiarColorLogo.src = "./imagenes/logo.jpg";
-          cambiarColorBolsa.src = "./imagenes/bolsa negra.jpg";
-        }
-      }
-    
      
     //// acá muestro el carrito ////
     
-    const mostrarCarrito = document.getElementById('toggleBolsa');
-    
-    mostrarCarrito.addEventListener('click', () => {
-        abrirCerrarCarrito.classList.toggle('mostrarCarrito');
-        console.log(abrirCerrarCarrito);
-    });
+    $('#toggleBolsa').click( () => {
+        $('#carritoDeCompras').slideDown(500)
+    })
     
     //// acá se cierra el carrito ////
     
-    const cerrarCarrito = document.getElementById('cerrarCarrito');
-    
-    cerrarCarrito.addEventListener('click', () => {
-        abrirCerrarCarrito.classList.toggle('mostrarCarrito');
-        console.log(abrirCerrarCarrito);
+    $('#cerrarCarrito').click ( () => {
+        $('#carritoDeCompras').slideUp(500)
     })
+
     
     
+    ///// A partir de acá están las funciones para verificar si hay objetos guardados en el local storage y de existir los renderiza con la función actualizarCarrito, en caso contrario no muestra nada.
+
     function guardarCarritoEnLocalStorage () {
         miLocalStorage.setItem('carrito', JSON.stringify(carrito));
     }
@@ -176,10 +148,117 @@ const abrirCerrarCarrito = document.getElementById('carritoDeCompras');
         }
     }
     
-    cargarCarritoDeLocalStorage();
+    cargarCarritoDeLocalStorage();      
 
     actualizarCarrito();
 
 
 
+const filtrar = () => {
+    let valorFiltroMarca = selectMarca.value
+    let valorFiltroPrecio = selectPrecio.value
 
+    let arrayFiltrado = []
+
+    botonPrecioAplicado.addEventListener('click', () => {
+        if (valorFiltroMarca == 'Todos') {
+            arrayFiltrado = listaProductos
+        } else {
+            arrayFiltrado = listaProductos.filter (el => el.marca == selectMarca.value)
+        }
+    
+        if (valorFiltroPrecio == 1) {
+            arrayFiltrado = arrayFiltrado.filter( el => el.precio >= 50000)
+        } else if (valorFiltroPrecio == 2) {
+            arrayFiltrado = arrayFiltrado.filter( el => el.precio >= 70000)
+        }
+    
+        mostrarProductos(arrayFiltrado);
+    } )  
+
+}
+
+selectMarca.addEventListener('change', ()=>{
+    filtrar();
+})
+selectPrecio.addEventListener('change', ()=>{
+    filtrar();
+})
+
+
+// === buscador ===
+
+const buscador = document.getElementById('inputBuscador')
+
+const buscar = (search) => {
+    return listaProductos.filter((prod) => prod.nombre.toLowerCase().includes(search))
+}
+
+buscador.addEventListener('input', () => {
+    const search = buscador.value.trim().toLowerCase()
+
+    botonBuscar.addEventListener('click', () => { 
+        mostrarProductos( buscar(search) )  
+    })
+    
+})
+
+/* Acá se añaden los productos del carrito a la parte de finalizar compra según el array de carrito, se oculta toda la página principal
+
+*/
+const buttonComprar = document.getElementById('buttonComprar');
+
+    buttonComprar.addEventListener('click', () => {
+        ocultarMain.classList.toggle('ocultarMain');
+        mostrarCompra.classList.toggle('mostrarComprar');
+        ocultarCarritoBolsa.classList.toggle('ocultarCarritoBolsa');
+
+        const mostrarProductosFinalizar = () => {
+
+            productosFinalizar.innerHTML = ""
+
+            carrito.forEach((producto) => {
+                const div = document.createElement('div')
+                div.classList.add('producto_finalizarCompra')
+
+                div.innerHTML = `
+                <div class="producto_finalizarCompra">
+                <img src="${producto.img}" alt="" class="imagenProductoCompra">
+                <p class="nombreProducto_finalizarCompra">${producto.nombre}</p>
+                <p class="precioProducto_finalizarCompra">$${producto.precio}</p>     
+                `
+                productosFinalizar.appendChild(div)
+            })
+            console.log(mostrarProductosFinalizar);
+        };
+
+        precioFinalCompra.innerText = carrito.reduce((acc, producto) => acc += producto.precio * producto.cantidad , 0)
+
+        console.log(buttonComprar);
+        mostrarProductosFinalizar();
+    });
+
+    buttonFinalizarCompraEvento = document.getElementById('buttonFinalizarCompraEvento');
+
+
+    // Si se finaliza la compra vuelve el carrito a un array vacío y lo aplica al local storage
+
+    buttonFinalizarCompraEvento.addEventListener('click', () => {
+        carrito = []
+        console.log(carrito);
+        guardarCarritoEnLocalStorage();
+    });
+
+
+    /// Si el carrito está vacío oculta el botón de comprar
+
+    function buttonComprarVerificador () {
+        if( $('#productosEnCarrito').is(':empty') ) { 
+            buttonComprar.classList.toggle('ocultarButtonComprar');
+            } else {
+            buttonComprar.classList.toggle('mostrarButtonComprar'); 
+                    
+        }
+        
+    }
+    buttonComprarVerificador();   

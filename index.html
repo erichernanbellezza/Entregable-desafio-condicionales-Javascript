@@ -9,11 +9,12 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body id="bodys">
+  
   <header class="header" id="headerModoOscuroId">
-    <img class="imagenLogo" src="./imagenes/logo.jpg" alt="" id="toggleLogo">
+    <a href="./index.html"><img class="imagenLogo" src="./imagenes/logoNegro.png" alt="" id="toggleLogo"></a>
     <button onclick="cambiarBotonModoOscuro()" id="botonModoOscuro" class="estilosBotonModoOscuro">Modo Oscuro</button>
-    <img class="imagenBolsa" src="./imagenes/bolsa negra.jpg" alt="" id="toggleBolsa">
+      <img class="imagenBolsa" src="./imagenes/bolsa negra.jpg" alt="" id="toggleBolsa"> 
 
     <div class="contenedorProductosCarrito" id="carritoDeCompras">
       <h2>Carrito</h2>
@@ -29,24 +30,35 @@
       <div class="estilosSumaTotal" >
        Precio Total : $ <span id="sumaTotal"></span>
       </div>
+      <button class="estilosButtonComprar" id="buttonComprar">Comprar</button>
       <button class="estilosCerrarCarrito" id="cerrarCarrito">Cerrar</button>
       </div>
          
     </div>
     
   </header>
-  <main class="main__principalContent">
+  <main class="mainPrincipalContent" id="mainPrincipal">
     <section class="buscador">
-         <input type="text" placeholder="Buscar por nombre">
+         <input type="text" placeholder="Buscar por nombre" id="inputBuscador">
          <label for=""></label>
-         <button>Buscar</button>
+         <button id="botonBuscar">Buscar</button>
     </section>
     <section class="segundaSeccionMain" id="toggleModoOscuro">
         <div class="rangoPrecios">
-            <h2>Resultados para:</h2>
-            <h3>Rango de precio</h3>
-            <input id=primerSlider type="range" value="20000" min="20000" max="300000" oninput="this.nextElementSibling.value = this.value"><output id=resultadoOutput>20000</output>
-            <input type="range" value="300000" min="20000" max="300000" oninput="this.nextElementSibling.value = this.value"><output>300000</output>
+            <h2>Mostrar productos por:</h2>
+            <h3>Ordenar por Precio</h3>
+            <select id="ordenarPorPrecio">
+              <option value="0">Todos</option>
+              <option value="1">Más de 50000</option>
+              <option value="2">Menos de 70000</option>
+            </select>
+
+            <h3>Ordenar por marca</h3>
+            <select id="ordenarPorMarca">
+              <option value="Todos">Todos</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Motorola">Motorola</option>
+            </select>          
             <button class="aplicarPrecios" id="precioAplicado">Aplicar</button>      
         </div>
         <div class="productos" id="contenedorProductos">
@@ -54,10 +66,82 @@
         </div>
     </section>
   </main>
-  <script src="./main.js"></script>
+
+  <div class="compra" id="compraID">
+    <h1 class="titulo">Finalizá tu compra</h1>
+    <div class="productos_finalizarCompra" id="productosFinalizar">
+        
+        
+
+    </div>
+    <div class="datosPersonales_finalizarCompra">
+        <h3>Datos Personales</h3>
+        <form onsubmit="return false" class="finalizarCompraForm">
+            <div class="datosPersonales">
+                <div class="formGroup">
+                    <label for="nombre">Nombre</label>
+                    <input class="form-control"  type="text" id="nombre" value="Juan Perez">
+                </div>
+                <div class="formGroup">
+                    <label for="email">Email</label>
+                    <input class="form-control"  type="email" id="email" value="jperez@email.com">
+                </div>
+                <div class="formGroup">
+                    <label class="" for="tel" >Telefono</label>
+                    <input class="l"  type="text" value="1553441515" id="tel">
+                </div>
+                <div class="formGroup cuotas">
+                    <label for="cuotas">Cantidad de Cuotas</label>
+                    <select class="form-control" name="" id="cuotas">
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <h3>Datos de la tarjeta de Credito</h3>
+                <div class="datosTarjetaDiv">
+                    <div class="imagenTarjeta">
+                        <img src="imagenes/credit_card.svg">
+                    </div>
+                    <div class="datosTarjeta">
+                        <label for="creditCardNumber">Número de tarjeta</label>
+                        <input class="numeroDeTarjeta" type="text" name="" id="creditCardNumber" value="1213-91011-5678-1234">
+                        <label for="creditCardName">Nombre</label>
+                        <input type="text" name="" id="creditCardName" value="PEREZ JUAN">
+                        <label for="creditCardCVC">cvc</label>
+                        <input class="inputCVC" type="text" name="" id="creditCardCVC" value="000">
+                    </div>
+                    <div class="vencimientoTarjeta">
+                            <div class="">
+                                <label for="creditCardDesde">Desde</label>
+                                <input type="text" name="" id="creditCardDesde" value="00/00">
+                            </div>
+                            <div class="">
+                                <label for="credictCardHasta">Hasta</label>
+                                <input type="text" name="" id="credictCardHasta" value="00/00">
+                            </div>
+                    </div>
+                </div>
+            <div class="buttonFinalizarCompra">
+              <div class="total">
+                <p>Total: $</p>
+                <p id="totalCompra">$108000</p>
+            </div>
+              <a href="./index.html">
+                <input class="" type="submit" value="Confirmar compra" id="buttonFinalizarCompraEvento">
+              </a> 
+            </div>
+        </form>
+    </div>
+</div>
+<script src="./stock.js"></script>
+<script src="./main.js"></script>
+<script src="./modoOscuro.js"></script>
 </body>
 </html>
 
    
     
-   
+  
