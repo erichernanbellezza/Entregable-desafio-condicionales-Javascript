@@ -50,7 +50,7 @@ const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
     
     const agregarAlCarrito = (itemId) => {
         const productoEncarrito = carrito.find( (prod) => prod.id === itemId)
-    
+        
         if (productoEncarrito) {
             productoEncarrito.cantidad++
          
@@ -64,6 +64,7 @@ const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
                 img: prod.img,
                 cantidad: 1
             })
+            
         }
     
         console.log(carrito)
@@ -71,6 +72,7 @@ const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
         actualizarCarrito()
         
         guardarCarritoEnLocalStorage();
+        
 
     }
     
@@ -117,6 +119,7 @@ const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
         actualizarCarrito()
        
         guardarCarritoEnLocalStorage();
+
         
     };
      
@@ -153,6 +156,7 @@ const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
     actualizarCarrito();
 
 
+// Esta función permite ordenar los productos de la página principal según precio o marca    
 
 const filtrar = () => {
     let valorFiltroMarca = selectMarca.value
@@ -209,39 +213,44 @@ buscador.addEventListener('input', () => {
 const buttonComprar = document.getElementById('buttonComprar');
 
     buttonComprar.addEventListener('click', () => {
-        ocultarMain.classList.toggle('ocultarMain');
-        mostrarCompra.classList.toggle('mostrarComprar');
-        ocultarCarritoBolsa.classList.toggle('ocultarCarritoBolsa');
 
-        const mostrarProductosFinalizar = () => {
-
-            productosFinalizar.innerHTML = ""
-
-            carrito.forEach((producto) => {
-                const div = document.createElement('div')
-                div.classList.add('producto_finalizarCompra')
-
-                div.innerHTML = `
-                <div class="producto_finalizarCompra">
-                <img src="${producto.img}" alt="" class="imagenProductoCompra">
-                <p class="nombreProducto_finalizarCompra">${producto.nombre}</p>
-                <p class="precioProducto_finalizarCompra">$${producto.precio}</p>     
-                `
-                productosFinalizar.appendChild(div)
-            })
-            console.log(mostrarProductosFinalizar);
-        };
-
-        precioFinalCompra.innerText = carrito.reduce((acc, producto) => acc += producto.precio * producto.cantidad , 0)
-
-        console.log(buttonComprar);
-        mostrarProductosFinalizar();
+        if (carrito.length >= 1) { 
+            ocultarMain.classList.toggle('ocultarMain');
+            mostrarCompra.classList.toggle('mostrarComprar');
+            ocultarCarritoBolsa.classList.toggle('ocultarCarritoBolsa');
+            abrirCerrarCarrito.classList.toggle('ocultarCarritoBolsa');
+           
+            const mostrarProductosFinalizar = () => {
+    
+                productosFinalizar.innerHTML = ""
+    
+                carrito.forEach((producto) => {
+                    const div = document.createElement('div')
+                    div.classList.add('producto_finalizarCompra')
+    
+                    div.innerHTML = `
+                    <div class="producto_finalizarCompra">
+                    <img src="${producto.img}" alt="" class="imagenProductoCompra">
+                    <p class="nombreProducto_finalizarCompra">${producto.nombre}</p>
+                    <p class="precioProducto_finalizarCompra">$${producto.precio}</p>     
+                    `
+                    productosFinalizar.appendChild(div)
+                })
+                console.log(mostrarProductosFinalizar);
+            };
+    
+            precioFinalCompra.innerText = carrito.reduce((acc, producto) => acc += producto.precio * producto.cantidad , 0)
+    
+            console.log(buttonComprar);
+            mostrarProductosFinalizar();
+        }
+        
     });
-
-    buttonFinalizarCompraEvento = document.getElementById('buttonFinalizarCompraEvento');
 
 
     // Si se finaliza la compra vuelve el carrito a un array vacío y lo aplica al local storage
+
+    buttonFinalizarCompraEvento = document.getElementById('buttonFinalizarCompraEvento');
 
     buttonFinalizarCompraEvento.addEventListener('click', () => {
         carrito = []
@@ -252,13 +261,4 @@ const buttonComprar = document.getElementById('buttonComprar');
 
     /// Si el carrito está vacío oculta el botón de comprar
 
-    function buttonComprarVerificador () {
-        if( $('#productosEnCarrito').is(':empty') ) { 
-            buttonComprar.classList.toggle('ocultarButtonComprar');
-            } else {
-            buttonComprar.classList.toggle('mostrarButtonComprar'); 
-                    
-        }
-        
-    }
-    buttonComprarVerificador();   
+   
