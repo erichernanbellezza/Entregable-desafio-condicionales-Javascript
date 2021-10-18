@@ -15,9 +15,6 @@ const mostrarCompra = document.getElementById('compraID');
 const precioFinalCompra = document.getElementById('totalCompra')
 const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
 
-   
- 
-    
     //Acá se van añadiendo con un bucle forEach a traves del DOM los productos a la página.
 
     let carrito = []
