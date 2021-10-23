@@ -162,9 +162,9 @@ const filtrar = () => {
 
     botonPrecioAplicado.addEventListener('click', () => {
         if (valorFiltroMarca == 'Todos') {
-            arrayFiltrado = listaProductos
+            arrayFiltrado = stockProductos
         } else {
-            arrayFiltrado = listaProductos.filter (el => el.marca == selectMarca.value)
+            arrayFiltrado = stockProductos.filter (el => el.marca == selectMarca.value)
         }
     
         if (valorFiltroPrecio == 1) {
@@ -191,7 +191,7 @@ selectPrecio.addEventListener('change', ()=>{
 const buscador = document.getElementById('inputBuscador')
 
 const buscar = (search) => {
-    return listaProductos.filter((prod) => prod.nombre.toLowerCase().includes(search))
+    return stockProductos.filter((prod) => prod.nombre.toLowerCase().includes(search))
 }
 
 buscador.addEventListener('input', () => {
