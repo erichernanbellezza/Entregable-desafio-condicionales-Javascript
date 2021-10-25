@@ -11,7 +11,6 @@ const ocultarCarritoBolsa = document.getElementById('toggleBolsa');
 let carrito = []
 const miLocalStorage = window.localStorage;
 
-
 const url = './stock.json'
 $.get(url, (response) => {
     stockProductos = response
@@ -227,7 +226,7 @@ const buttonComprar = document.getElementById('buttonComprar');
                     div.classList.add('producto_finalizarCompra')
     
                     div.innerHTML = `
-                    <div class="producto_finalizarCompra">
+                    <div class="producto_finalizarCompra" >
                     <img src="${producto.img}" alt="" class="imagenProductoCompra">
                     <p class="nombreProducto_finalizarCompra">${producto.nombre}</p>
                     <p class="precioProducto_finalizarCompra">$${producto.precio}</p>     
@@ -266,18 +265,35 @@ const buttonComprar = document.getElementById('buttonComprar');
 
     };
 
-
-    // Si se finaliza la compra vuelve el carrito a un array vacío y lo aplica al local storage
+    // Si se finaliza la compra vuelve el carrito a un array vacío y lo aplica al local storage , además de mostrar un mensaje con los datos ingresados vía el formulario.
 
     buttonFinalizarCompraEvento = document.getElementById('buttonFinalizarCompraEvento');
-
+    finalizarCompraMensaje = document.getElementById('finalizarCompraMensaje');
+    ocultarFormCompra = document.getElementById('compraID');
+    
     buttonFinalizarCompraEvento.addEventListener('click', () => {
+        ocultarFormCompra.classList.add('ocultar');
         carrito = []
         console.log(carrito);
         guardarCarritoEnLocalStorage();
+
+        let nombre = document.getElementById('nombre').value;
+        let email = document.getElementById('email').value;
+        let creditCardNumber = document.getElementById('creditCardNumber').value;
+        let creditCardNumberLast4 = creditCardNumber.substr(15)
+        let cuotas = document.getElementById('cuotas').value.replaceAll('_', ' Cuotas de: $');
+
+        const div = document.createElement('div')
+        div.classList.add('mensajeCompra')
+    
+        div.innerHTML = `
+            <h1>¡Gracias <span class="greenColor">${nombre}</span> por elegirnos!</h1>
+            <h2>¡El pago fue realizado con éxito!</h2>
+            <p>Corroborá las instrucciones de retiro en tu correo: <span class="greenColor">${email}</span ></p>
+            <p>Pagaste $ ${totalCompra.innerHTML} en ${cuotas}</p>
+            <p>Con la tarjeta número: **** - **** - **** - ${creditCardNumberLast4}</p>
+        `
+        finalizarCompraMensaje.appendChild(div)
     });
-
-
-
 
 

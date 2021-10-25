@@ -5,6 +5,9 @@ const headerModoOscuro = document.getElementById('headerModoOscuroId');
 const cambiarColorBolsa = document.getElementById('toggleBolsa');
 const cambiarColorLogo = document.getElementById('toggleLogo');
 const cambiarColorCarrito = document.getElementById('carritoDeCompras');
+const modoOscuroCompra = document.getElementById('compraID');
+const modoOscuroCompraTarjeta = document.getElementById('datosTarjetaModoOscuro');
+const mensajeCompraModoOscuro = document.getElementsByClassName('mensajeCompra');
 
  // Acá voy a añadir un modo oscuro a la página, voy a cambiar el background principal, el color de la tipografía y el logo de la página.
     
@@ -13,6 +16,9 @@ const cambiarColorCarrito = document.getElementById('carritoDeCompras');
     botonPrecioAplicado.classList.toggle('botonAplicarModoOscuro');
     headerModoOscuroId.classList.toggle('modoOscuroHeader');
     cambiarColorCarrito.classList.toggle('modoOscuroCarrito');
+    modoOscuroCompra.classList.toggle('modoOscuroCompra');
+    datosTarjetaModoOscuro.classList.toggle('modoOscuroCompraTarjetas');
+    
     console.log(modoOscuro);
 });
 
